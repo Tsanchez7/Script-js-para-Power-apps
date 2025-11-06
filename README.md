@@ -4,34 +4,20 @@
  * Descripción: Funciones reutilizables para personalizar formularios
  * Última actualización: 2025-11-05
  ********************************************************************/
+Cómo usarlo en Power Apps (Dataverse)
 
-// ✅ Obtener contexto del formulario
-function getFormContext(executionContext) {
-    return executionContext.getFormContext();
-}
+En tu app model-driven, ve a Configuración → Personalizaciones → Personalizar el sistema.
 
-// 🎛️ Mostrar u ocultar campo
-function mostrarOcultarCampo(executionContext, nombreCampo, visible) {
-    const formContext = getFormContext(executionContext);
-    const campo = formContext.getControl(nombreCampo);
-    if (campo) campo.setVisible(visible);
-}
+Crea una Biblioteca Web y sube este archivo .js.
 
-// 🔒 Bloquear o desbloquear campo
-function bloquearCampo(executionContext, nombreCampo, bloquear = true) {
-    const formContext = getFormContext(executionContext);
-    const control = formContext.getControl(nombreCampo);
-    if (control) control.setDisabled(bloquear);
-}
+Abre la entidad o formulario donde quieras aplicarlo.
 
-// 🧠 Mostrar u ocultar pestaña
-function mostrarOcultarPestaña(executionContext, nombrePestaña, visible) {
-    const formContext = getFormContext(executionContext);
-    const tab = formContext.ui.tabs.get(nombrePestaña);
-    if (tab) tab.setVisible(visible);
-}
+En la pestaña Eventos del formulario, agrega:
 
-// 📄 Establecer valor de un campo
-function establecerValor(executionContext, nombreCampo, valor) {
-    const formContext = getFormContext(executionContext);
-    const atributo = formCon
+Biblioteca: tu nuevo archivo .js
+
+Función: por ejemplo PowerAppsUtils.onFormLoad (en evento OnLoad)
+
+O PowerAppsUtils.onFieldChange (en evento OnChange de un campo, como telephone1)
+
+Marca “Pasar contexto de ejecución como primer parámetro”.
